@@ -5,7 +5,7 @@ if (!process.env.GEL_INSTANCE || !process.env.GEL_SECRET_KEY) {
 }
 
 const client = createClient({
-    dsn: `edgedb://${process.env.GEL_INSTANCE}.cloud.geldata.com`,
+    dsn: `edgedb://${process.env.GEL_INSTANCE}.cloud.geldata.com:5656`,
     tlsSecurity: 'insecure',
     waitUntilAvailable: 30000, // 30 seconds timeout
     secretKey: process.env.GEL_SECRET_KEY
