@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import useAdminPanelTalon from '@/talons/useAdminPanelTalon';
 
 const AdminPanel = () => {
-    const { locations, collections, loading, error, addLocation, addCollection } = useAdminPanelTalon();
+    const { locations, loading, error, addLocation, addCollection } = useAdminPanelTalon();
     const [newLocation, setNewLocation] = useState('');
     const [notification, setNotification] = useState({ show: false, message: '', type: '' });
     const [form, setForm] = useState({

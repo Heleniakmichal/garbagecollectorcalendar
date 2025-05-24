@@ -49,7 +49,7 @@ const Notification = () => {
 
                 // Show browser notification if permitted
                 if (permission === 'granted' && 'Notification' in window) {
-                    const notification = new window.Notification('Przypomnienie o wywozie śmieci', {
+                    new window.Notification('Przypomnienie o wywozie śmieci', {
                         body: message,
                         icon: '/icon-192x192.png',
                         badge: '/icon-192x192.png',
