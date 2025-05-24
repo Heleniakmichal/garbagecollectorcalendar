@@ -4,14 +4,14 @@ import { useEffect, useState } from 'react';
 
 export type Location = {
     id: string;
-    name: string;
+    nazwa: string;
 };
 
 export type GarbageCollection = {
     id: string;
     date: string;
     type: string;
-    locationId: string;
+    lokalizacjaId: string;
 };
 
 const useAdminPanelTalon = () => {
@@ -20,7 +20,7 @@ const useAdminPanelTalon = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [form, setForm] = useState({
-        locationId: '',
+        lokalizacjaId: '',
         date: '',
         type: ''
     });
@@ -80,7 +80,7 @@ const useAdminPanelTalon = () => {
             const newCollection = await response.json();
             setCollections(prev => [...prev, newCollection]);
             setForm({
-                locationId: '',
+                lokalizacjaId: '',
                 date: '',
                 type: ''
             });

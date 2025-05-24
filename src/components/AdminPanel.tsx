@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import Link from 'next/link';
 import useAdminPanelTalon from '@/talons/useAdminPanelTalon';
 import classes from './styles.module.css';
 
@@ -18,17 +19,22 @@ const AdminPanel = () => {
 
     return (
         <div className={classes.root}>
-            <h1>
-                <FormattedMessage id="admin.title" defaultMessage="Admin Panel" />
-            </h1>
+            <div className={classes.header}>
+                <h1>
+                    <FormattedMessage id="admin.title" defaultMessage="Admin Panel" />
+                </h1>
+                <Link href="/" className={classes.homeButton}>
+                    <FormattedMessage id="admin.home" defaultMessage="Home" />
+                </Link>
+            </div>
             
             <form onSubmit={handleSubmit} className={classes.form}>
                 <div className={classes.formGroup}>
                     <label>
                         <FormattedMessage id="admin.location" defaultMessage="Location" />
                         <select 
-                            name="locationId" 
-                            value={form.locationId} 
+                            name="lokalizacjaId" 
+                            value={form.lokalizacjaId} 
                             onChange={handleChange} 
                             required
                         >
@@ -37,7 +43,7 @@ const AdminPanel = () => {
                             </option>
                             {locations.map(loc => (
                                 <option key={loc.id} value={loc.id}>
-                                    {loc.name}
+                                    {loc.nazwa}
                                 </option>
                             ))}
                         </select>
@@ -93,7 +99,7 @@ const AdminPanel = () => {
                         <div className={classes.date}>{collection.date}</div>
                         <div className={classes.type}>{collection.type}</div>
                         <div className={classes.location}>
-                            {locations.find(loc => loc.id === collection.locationId)?.name}
+                            {locations.find(loc => loc.id === collection.lokalizacjaId)?.nazwa}
                         </div>
                     </div>
                 ))}
