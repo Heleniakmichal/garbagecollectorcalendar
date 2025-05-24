@@ -1,0 +1,48 @@
+.root {
+    @apply p-4 max-w-4xl mx-auto;
+}
+
+.calendar {
+    @apply bg-white rounded-lg shadow-md p-4;
+}
+
+.collection {
+    @apply border-b border-gray-200 py-2 last:border-b-0;
+}
+
+.date {
+    @apply font-medium text-gray-900;
+}
+
+.type {
+    @apply text-sm text-gray-600;
+}
+
+.location {
+    @apply text-sm text-gray-500;
+}
+
+.form {
+    @apply space-y-4 mb-8 p-4 bg-white rounded-lg shadow-md;
+}
+
+.formGroup {
+    @apply space-y-1;
+}
+
+.formGroup label {
+    @apply block text-sm font-medium text-gray-700;
+}
+
+.formGroup select,
+.formGroup input {
+    @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500;
+}
+
+.submitButton {
+    @apply bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+}
+
+.collections {
+    @apply mt-8 p-4 bg-white rounded-lg shadow-md;
+} 

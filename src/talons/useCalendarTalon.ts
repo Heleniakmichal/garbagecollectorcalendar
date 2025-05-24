@@ -1,17 +1,15 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from 'react';
 
 export type GarbageCollection = {
     id: string;
-    lokalizacjaId: string;
-    lokalizacja: {
+    date: string;
+    type: string;
+    location: {
         id: string;
-        nazwa: string;
+        name: string;
     };
-    miesiac: string;
-    dzien: string;
-    typ: string;
 };
 
 const useCalendarTalon = () => {

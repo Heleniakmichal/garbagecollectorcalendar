@@ -1,57 +1,37 @@
-'use client';
+"use client";
 
 import React from 'react';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
+import { FormattedMessage } from 'react-intl';
 import useCalendarTalon from '@/talons/useCalendarTalon';
+import classes from './styles.module.css';
 
 const Calendar = () => {
     const { collections, loading, error } = useCalendarTalon();
 
-    const events = collections.map(collection => ({
-        title: `${collection.lokalizacja.nazwa} - ${collection.typ}`,
-        date: `${new Date().getFullYear()}-${getMonthNumber(collection.miesiac)}-${collection.dzien}`,
-        backgroundColor: collection.typ === 'Segregowane' ? '#22c55e' : '#ef4444',
-        borderColor: collection.typ === 'Segregowane' ? '#22c55e' : '#ef4444',
-    }));
-
     if (loading) {
-        return <div className="p-4 text-center">Ładowanie...</div>;
+        return <div>Loading...</div>;
     }
 
     if (error) {
-        return <div className="p-4 text-center text-red-600">Błąd ładowania</div>;
+        return <div>Error: {error}</div>;
     }
 
     return (
-        <div className="p-4 max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold mb-4 text-gray-800">Terminy wywozu śmieci</h2>
-            <div className="bg-white rounded-lg shadow-md p-4">
-                <FullCalendar
-                    plugins={[dayGridPlugin]}
-                    initialView="dayGridMonth"
-                    locale="pl"
-                    headerToolbar={{
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'dayGridMonth'
-                    }}
-                    events={events}
-                    height="auto"
-                />
+        <div className={classes.root}>
+            <h1>
+                <FormattedMessage id="calendar.title" defaultMessage="Garbage Collection Calendar" />
+            </h1>
+            <div className={classes.calendar}>
+                {collections.map(collection => (
+                    <div key={collection.id} className={classes.collection}>
+                        <div className={classes.date}>{collection.date}</div>
+                        <div className={classes.type}>{collection.type}</div>
+                        <div className={classes.location}>{collection.location.name}</div>
+                    </div>
+                ))}
             </div>
         </div>
     );
 };
-
-// Helper function to convert Polish month names to numbers
-function getMonthNumber(month: string): string {
-    const months: { [key: string]: string } = {
-        'Styczeń': '01', 'Luty': '02', 'Marzec': '03', 'Kwiecień': '04',
-        'Maj': '05', 'Czerwiec': '06', 'Lipiec': '07', 'Sierpień': '08',
-        'Wrzesień': '09', 'Październik': '10', 'Listopad': '11', 'Grudzień': '12'
-    };
-    return months[month] || '01';
-}
 
 export default Calendar; 
