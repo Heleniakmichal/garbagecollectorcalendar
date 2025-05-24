@@ -7,6 +7,7 @@ if (!process.env.EDGEDB_DSN) {
 const client = createClient({
   dsn: process.env.EDGEDB_DSN,
   tlsSecurity: 'insecure',
+  waitUntilAvailable: 30000, // 30 seconds timeout
 });
 
-export default client; 
+export default client;
