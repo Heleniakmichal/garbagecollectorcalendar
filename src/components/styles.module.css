@@ -45,4 +45,24 @@
 
 .collections {
     @apply mt-8 p-4 bg-white rounded-lg shadow-md;
+}
+
+.notification {
+    @apply fixed bottom-0 right-0 left-0 sm:left-auto sm:right-4 sm:bottom-4 bg-blue-600 text-white p-4 sm:p-6 rounded-t-lg sm:rounded-lg shadow-xl z-50 max-w-full sm:max-w-md;
+}
+
+.notification h3 {
+    @apply font-bold text-lg mb-2;
+}
+
+.notification .collection {
+    @apply border-b border-blue-500 last:border-b-0;
+}
+
+.notification .type {
+    @apply text-white text-base;
+}
+
+.notification .location {
+    @apply text-blue-100 text-sm;
 } 
