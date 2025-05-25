@@ -117,6 +117,16 @@ const terytData: TerytData = {
             { kod: '02', nazwa: 'Gmina Żabno' },
             { kod: '03', nazwa: 'Gmina Radłów' },
             { kod: '04', nazwa: 'Gmina Wierzchosławice' }
+        ],
+        '1201': [ // Kraków
+            { kod: '01', nazwa: 'Dzielnica I Stare Miasto' },
+            { kod: '02', nazwa: 'Dzielnica II Grzegórzki' },
+            { kod: '03', nazwa: 'Dzielnica III Prądnik Czerwony' }
+        ],
+        '1202': [ // powiat bocheński
+            { kod: '01', nazwa: 'Gmina Bochnia' },
+            { kod: '02', nazwa: 'Gmina Drwinia' },
+            { kod: '03', nazwa: 'Gmina Łapanów' }
         ]
     },
     miejscowosci: {
@@ -129,6 +139,16 @@ const terytData: TerytData = {
             { kod: '0001', nazwa: 'Wieliczka' },
             { kod: '0002', nazwa: 'Lednica Górna' },
             { kod: '0003', nazwa: 'Lednica Dolna' }
+        ],
+        '120703': [ // Gmina Skawina
+            { kod: '0001', nazwa: 'Skawina' },
+            { kod: '0002', nazwa: 'Rzozów' },
+            { kod: '0003', nazwa: 'Korabniki' }
+        ],
+        '121701': [ // Gmina Tarnów
+            { kod: '0001', nazwa: 'Tarnów' },
+            { kod: '0002', nazwa: 'Zbylitowska Góra' },
+            { kod: '0003', nazwa: 'Nowodąbie' }
         ]
     }
 };
@@ -177,11 +197,15 @@ export async function GET(request: Request) {
                     return NextResponse.json({ error: 'Missing gmina parameter' }, { status: 400 });
                 }
                 // Find miejscowosci by gmina name
-                for (const miejscowosci of Object.values(terytData.miejscowosci)) {
-                    // Check if this gmina matches the param
-                    const gminaFound = Object.values(terytData.gminy).flat().find(g => g.nazwa === param);
-                    if (gminaFound) {
-                        data = miejscowosci;
+                // First find the gmina and its key
+                for (const [gminaKey, gminy] of Object.entries(terytData.gminy)) {
+                    const gmina = gminy.find(g => g.nazwa === param);
+                    if (gmina) {
+                        // Construct miejscowosci key: gminaKey + gmina.kod
+                        const miejscowosciKey = gminaKey + gmina.kod;
+                        if (terytData.miejscowosci[miejscowosciKey]) {
+                            data = terytData.miejscowosci[miejscowosciKey];
+                        }
                         break;
                     }
                 }
