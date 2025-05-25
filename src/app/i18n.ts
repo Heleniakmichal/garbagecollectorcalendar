@@ -19,7 +19,21 @@ const messages = {
         'garbage.types.glass': 'Szkło',
         'garbage.types.plastic': 'Plastik',
         'garbage.types.electronic': 'Elektronika',
-        'garbage.types.other': 'Inne'
+        'garbage.types.other': 'Inne',
+        'calendar.title': 'Harmonogram odbioru odpadów',
+        'admin.title': 'Panel administracyjny',
+        'admin.home': 'Strona główna',
+        'admin.teryt.title': 'Dodaj nową lokalizację',
+        'admin.collections.title': 'Dodaj odbiór odpadów',
+        'admin.location': 'Lokalizacja',
+        'admin.date': 'Data',
+        'admin.type': 'Typ',
+        'admin.add': 'Dodaj odbiór',
+        'admin.collections': 'Odbioru',
+        'admin.selectLocation': 'Wybierz...',
+        'admin.selectType': 'Wybierz...',
+        'admin.type.mixed': 'Zmieszane',
+        'admin.type.recyclable': 'Recykling'
     }
 };
 

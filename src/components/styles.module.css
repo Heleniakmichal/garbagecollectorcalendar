@@ -10,28 +10,20 @@
     @apply bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
 }
 
-.calendar {
-    @apply bg-white rounded-lg shadow-md p-4;
+.sections {
+    @apply space-y-8;
 }
 
-.collection {
-    @apply border-b border-gray-200 py-2 last:border-b-0;
+.section {
+    @apply bg-white rounded-lg shadow-md p-6;
 }
 
-.date {
-    @apply font-medium text-gray-900;
-}
-
-.type {
-    @apply text-sm text-gray-600;
-}
-
-.location {
-    @apply text-sm text-gray-500;
+.section h2 {
+    @apply text-xl font-semibold mb-4;
 }
 
 .form {
-    @apply space-y-4 mb-8 p-4 bg-white rounded-lg shadow-md;
+    @apply space-y-4;
 }
 
 .formGroup {
@@ -52,7 +44,23 @@
 }
 
 .collections {
-    @apply mt-8 p-4 bg-white rounded-lg shadow-md;
+    @apply space-y-4;
+}
+
+.collection {
+    @apply border-b border-gray-200 py-2 last:border-b-0;
+}
+
+.date {
+    @apply font-medium text-gray-900;
+}
+
+.type {
+    @apply text-sm text-gray-600;
+}
+
+.location {
+    @apply text-sm text-gray-500;
 }
 
 .notification {

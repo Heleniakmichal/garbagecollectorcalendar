@@ -19,7 +19,11 @@ const useAdminPanelTalon = () => {
     const [collections, setCollections] = useState<GarbageCollection[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [form, setForm] = useState({
+    const [form, setForm] = useState<{
+        lokalizacjaId: string;
+        date: string;
+        type: string;
+    }>({
         lokalizacjaId: '',
         date: '',
         type: ''
