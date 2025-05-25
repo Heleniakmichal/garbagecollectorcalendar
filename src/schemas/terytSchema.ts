@@ -1,4 +1,24 @@
-import { Schema } from 'informed';
+interface FormState {
+    values: {
+        wojewodztwo?: string;
+        powiat?: string;
+        gmina?: string;
+        miejscowosc?: string;
+    };
+}
+
+export interface Schema {
+    type: string;
+    properties: {
+        [key: string]: {
+            type: string;
+            title: string;
+            enum?: string[];
+            'ui:order'?: number;
+            'ui:relevant'?: (formState: FormState) => boolean;
+        };
+    };
+}
 
 export const terytSchema: Schema = {
     type: 'object',
@@ -31,21 +51,21 @@ export const terytSchema: Schema = {
             title: 'Powiat',
             enum: [],
             'ui:order': 2,
-            'ui:relevant': (formState: any) => !!formState.values.wojewodztwo
+            'ui:relevant': (formState: FormState) => !!formState.values.wojewodztwo
         },
         gmina: {
             type: 'string',
             title: 'Gmina',
             enum: [],
             'ui:order': 3,
-            'ui:relevant': (formState: any) => !!formState.values.powiat
+            'ui:relevant': (formState: FormState) => !!formState.values.powiat
         },
         miejscowosc: {
             type: 'string',
             title: 'Miejscowość',
             enum: [],
             'ui:order': 4,
-            'ui:relevant': (formState: any) => !!formState.values.gmina
+            'ui:relevant': (formState: FormState) => !!formState.values.gmina
         }
     }
 }; 

@@ -1,54 +1,84 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { terytSchema, type Schema } from '@/schemas/terytSchema';
 import { terytService } from '@/services/terytService';
-import { terytSchema } from '@/schemas/terytSchema';
+
+interface FormState {
+    values: {
+        wojewodztwo?: string;
+        powiat?: string;
+        gmina?: string;
+        miejscowosc?: string;
+    };
+}
 
 export const useTerytFormTalon = () => {
-    const [schema, setSchema] = useState(terytSchema);
-    const [loading, setLoading] = useState(false);
+    const [schema, setSchema] = useState<Schema>(terytSchema);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const updateSchema = async (formState: any) => {
-        setLoading(true);
+    const updateSchema = async (formState: FormState) => {
+        const { values } = formState;
+        setIsLoading(true);
+        setError(null);
+
         try {
-            const newSchema = { ...schema };
-            
-            if (formState.values.wojewodztwo) {
-                const powiaty = await terytService.getPowiaty(formState.values.wojewodztwo);
-                newSchema.properties.powiat.enum = powiaty;
+            if (values.wojewodztwo && !values.powiat) {
+                const powiaty = await terytService.getPowiaty(values.wojewodztwo);
+                setSchema((prev: Schema) => ({
+                    ...prev,
+                    properties: {
+                        ...prev.properties,
+                        powiat: {
+                            ...prev.properties.powiat,
+                            enum: powiaty
+                        }
+                    }
+                }));
             }
 
-            if (formState.values.powiat) {
-                const gminy = await terytService.getGminy(formState.values.powiat);
-                newSchema.properties.gmina.enum = gminy;
+            if (values.powiat && !values.gmina) {
+                const gminy = await terytService.getGminy(values.powiat);
+                setSchema((prev: Schema) => ({
+                    ...prev,
+                    properties: {
+                        ...prev.properties,
+                        gmina: {
+                            ...prev.properties.gmina,
+                            enum: gminy
+                        }
+                    }
+                }));
             }
 
-            if (formState.values.gmina) {
-                const miejscowosci = await terytService.getMiejscowosci(formState.values.gmina);
-                newSchema.properties.miejscowosc.enum = miejscowosci;
+            if (values.gmina && !values.miejscowosc) {
+                const miejscowosci = await terytService.getMiejscowosci(values.gmina);
+                setSchema((prev: Schema) => ({
+                    ...prev,
+                    properties: {
+                        ...prev.properties,
+                        miejscowosc: {
+                            ...prev.properties.miejscowosc,
+                            enum: miejscowosci
+                        }
+                    }
+                }));
             }
-
-            setSchema(newSchema);
         } catch (err) {
             setError(err instanceof Error ? err.message : 'An error occurred');
         } finally {
-            setLoading(false);
+            setIsLoading(false);
         }
     };
 
-    const handleSubmit = async (formState: any) => {
-        try {
-            // Here you can handle the form submission
-            console.log('Form submitted:', formState.values);
-        } catch (err) {
-            setError(err instanceof Error ? err.message : 'An error occurred');
-        }
+    const handleSubmit = (formState: FormState) => {
+        console.log('Form submitted:', formState.values);
     };
 
     return {
         schema,
-        loading,
+        isLoading,
         error,
         updateSchema,
         handleSubmit
