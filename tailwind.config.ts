@@ -14,5 +14,6 @@ export default {
       },
     },
   },
+  separator: "_",
   plugins: [],
 } satisfies Config;
