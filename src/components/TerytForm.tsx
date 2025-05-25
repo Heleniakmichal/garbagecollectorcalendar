@@ -7,9 +7,9 @@ import { useTerytFormTalon } from '@/talons/useTerytFormTalon';
 import classes from './styles.module.css';
 
 const TerytForm = () => {
-    const { schema, loading, error, updateSchema, handleSubmit } = useTerytFormTalon();
+    const { schema, isLoading, error, updateSchema, handleSubmit } = useTerytFormTalon();
 
-    if (loading) {
+    if (isLoading) {
         return <div>Loading...</div>;
     }
 
@@ -18,19 +18,20 @@ const TerytForm = () => {
     }
 
     return (
-        <div className={classes.root}>
+        <div className={classes.formContainer}>
             <h2>
-                <FormattedMessage id="teryt.title" defaultMessage="Wybierz lokalizację" />
+                <FormattedMessage
+                    id="teryt.form.title"
+                    defaultMessage="Wybierz lokalizację"
+                />
             </h2>
-            <Form
-                schema={schema}
-                onSubmit={handleSubmit}
-                onChange={updateSchema}
-                className={classes.form}
-            >
+            <Form schema={schema} onSubmit={handleSubmit} onChange={updateSchema}>
                 <SchemaFields />
                 <button type="submit" className={classes.submitButton}>
-                    <FormattedMessage id="teryt.submit" defaultMessage="Zapisz" />
+                    <FormattedMessage
+                        id="teryt.form.submit"
+                        defaultMessage="Zapisz"
+                    />
                 </button>
             </Form>
         </div>
