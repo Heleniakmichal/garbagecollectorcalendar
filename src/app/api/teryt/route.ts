@@ -177,7 +177,7 @@ export async function GET(request: Request) {
                     return NextResponse.json({ error: 'Missing gmina parameter' }, { status: 400 });
                 }
                 // Find miejscowosci by gmina name
-                for (const [gminaKey, miejscowosci] of Object.entries(terytData.miejscowosci)) {
+                for (const miejscowosci of Object.values(terytData.miejscowosci)) {
                     // Check if this gmina matches the param
                     const gminaFound = Object.values(terytData.gminy).flat().find(g => g.nazwa === param);
                     if (gminaFound) {
