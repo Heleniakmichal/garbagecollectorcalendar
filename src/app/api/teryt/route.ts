@@ -15,8 +15,7 @@ export async function GET(request: Request) {
         const response = await fetch(`${TERYT_API_BASE}/${type}?${type}=${encodeURIComponent(param)}`, {
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'User-Agent': 'Mozilla/5.0'
+                'Content-Type': 'application/json'
             }
         });
 
