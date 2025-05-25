@@ -32,15 +32,18 @@ export const useTerytFormTalon = () => {
                         ...prev.properties,
                         powiat: {
                             ...prev.properties.powiat,
-                            enum: powiaty
+                            enum: powiaty,
+                            value: ''
                         },
                         gmina: {
                             ...prev.properties.gmina,
-                            enum: []
+                            enum: [],
+                            value: ''
                         },
                         miejscowosc: {
                             ...prev.properties.miejscowosc,
-                            enum: []
+                            enum: [],
+                            value: ''
                         }
                     }
                 }));
@@ -54,11 +57,13 @@ export const useTerytFormTalon = () => {
                         ...prev.properties,
                         gmina: {
                             ...prev.properties.gmina,
-                            enum: gminy
+                            enum: gminy,
+                            value: ''
                         },
                         miejscowosc: {
                             ...prev.properties.miejscowosc,
-                            enum: []
+                            enum: [],
+                            value: ''
                         }
                     }
                 }));
@@ -72,7 +77,8 @@ export const useTerytFormTalon = () => {
                         ...prev.properties,
                         miejscowosc: {
                             ...prev.properties.miejscowosc,
-                            enum: miejscowosci
+                            enum: miejscowosci,
+                            value: ''
                         }
                     }
                 }));

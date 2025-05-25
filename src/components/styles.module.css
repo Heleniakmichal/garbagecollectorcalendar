@@ -1,54 +1,94 @@
 .root {
-    @apply p-4 max-w-4xl mx-auto;
+    composes: flex from global;
+    composes: flex-col from global;
+    composes: gap-8 from global;
+    composes: p-8 from global;
 }
 
 .header {
-    @apply flex justify-between items-center mb-8;
+    composes: flex from global;
+    composes: justify-between from global;
+    composes: items-center from global;
 }
 
 .homeButton {
-    @apply bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+    composes: px-4 from global;
+    composes: py-2 from global;
+    composes: bg-blue-500 from global;
+    composes: text-white from global;
+    composes: rounded from global;
+    composes: hover:bg-blue-600 from global;
 }
 
 .sections {
-    @apply space-y-8;
+    composes: grid from global;
+    composes: grid-cols-1 from global;
+    composes: md:grid-cols-2 from global;
+    composes: gap-8 from global;
 }
 
 .section {
-    @apply bg-white rounded-lg shadow-md p-6;
+    composes: bg-white from global;
+    composes: p-6 from global;
+    composes: rounded-lg from global;
+    composes: shadow from global;
 }
 
-.section h2 {
-    @apply text-xl font-semibold mb-4;
+.sectionHeader {
+    composes: text-xl from global;
+    composes: font-bold from global;
+    composes: mb-4 from global;
 }
 
-.form {
-    @apply space-y-4;
+.formContainer {
+    composes: bg-white from global;
+    composes: p-6 from global;
+    composes: rounded-lg from global;
+    composes: shadow from global;
 }
 
 .formGroup {
-    @apply space-y-1;
-}
-
-.formGroup label {
-    @apply block text-sm font-medium text-gray-700;
-}
-
-.formGroup select,
-.formGroup input {
-    @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500;
+    composes: mb-4 from global;
 }
 
 .submitButton {
-    @apply bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+    composes: mt-4 from global;
+    composes: px-4 from global;
+    composes: py-2 from global;
+    composes: bg-blue-500 from global;
+    composes: text-white from global;
+    composes: rounded from global;
+    composes: hover:bg-blue-600 from global;
+}
+
+.loading {
+    composes: text-center from global;
+    composes: py-4 from global;
+    composes: text-gray-600 from global;
+}
+
+.error {
+    composes: text-center from global;
+    composes: py-4 from global;
+    composes: text-red-600 from global;
+    composes: bg-red-100 from global;
+    composes: rounded from global;
 }
 
 .collections {
-    @apply space-y-4;
+    composes: mt-8 from global;
 }
 
-.collection {
-    @apply border-b border-gray-200 py-2 last:border-b-0;
+.notification {
+    composes: fixed from global;
+    composes: bottom-4 from global;
+    composes: right-4 from global;
+    composes: bg-green-500 from global;
+    composes: text-white from global;
+    composes: px-4 from global;
+    composes: py-2 from global;
+    composes: rounded from global;
+    composes: shadow-lg from global;
 }
 
 .date {
@@ -61,10 +101,6 @@
 
 .location {
     @apply text-sm text-gray-500;
-}
-
-.notification {
-    @apply fixed bottom-0 right-0 left-0 sm:left-auto sm:right-4 sm:bottom-4 bg-blue-600 text-white p-4 sm:p-6 rounded-t-lg sm:rounded-lg shadow-xl z-50 max-w-full sm:max-w-md;
 }
 
 .notification h3 {

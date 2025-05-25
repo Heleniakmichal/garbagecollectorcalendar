@@ -9,13 +9,32 @@ import classes from './styles.module.css';
 const TerytForm = () => {
     const { schema, isLoading, error, updateSchema, handleSubmit } = useTerytFormTalon();
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
+    const content = isLoading ? (
+        <div className={classes.loading}>
+            <FormattedMessage
+                id="teryt.form.loading"
+                defaultMessage="Ładowanie..."
+            />
+        </div>
+    ) : error ? (
+        <div className={classes.error}>
+            <FormattedMessage
+                id="teryt.form.error"
+                defaultMessage="Błąd: {error}"
+                values={{ error }}
+            />
+        </div>
+    ) : (
+        <Form schema={schema} onSubmit={handleSubmit} onChange={updateSchema}>
+            <SchemaFields />
+            <button type="submit" className={classes.submitButton}>
+                <FormattedMessage
+                    id="teryt.form.submit"
+                    defaultMessage="Zapisz"
+                />
+            </button>
+        </Form>
+    );
 
     return (
         <div className={classes.formContainer}>
@@ -25,15 +44,7 @@ const TerytForm = () => {
                     defaultMessage="Wybierz lokalizację"
                 />
             </h2>
-            <Form schema={schema} onSubmit={handleSubmit} onChange={updateSchema}>
-                <SchemaFields />
-                <button type="submit" className={classes.submitButton}>
-                    <FormattedMessage
-                        id="teryt.form.submit"
-                        defaultMessage="Zapisz"
-                    />
-                </button>
-            </Form>
+            {content}
         </div>
     );
 };
