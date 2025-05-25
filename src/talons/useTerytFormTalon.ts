@@ -20,12 +20,18 @@ export const useTerytFormTalon = () => {
 
     const updateSchema = async (newFormState: FormState) => {
         const { values } = newFormState;
+        console.log('Form state changed:', values); // Debug log
+
         setIsLoading(true);
         setError(null);
 
         try {
+            // If wojewodztwo changed, clear powiat, gmina, and miejscowosc
             if (values.wojewodztwo) {
+                console.log('Fetching powiaty for:', values.wojewodztwo); // Debug log
                 const powiaty = await terytService.getPowiaty(values.wojewodztwo);
+                console.log('Received powiaty:', powiaty); // Debug log
+
                 setSchema((prev: Schema) => ({
                     ...prev,
                     properties: {
@@ -33,24 +39,28 @@ export const useTerytFormTalon = () => {
                         powiat: {
                             ...prev.properties.powiat,
                             enum: powiaty,
-                            value: ''
+                            value: '' // Clear selected value
                         },
                         gmina: {
                             ...prev.properties.gmina,
                             enum: [],
-                            value: ''
+                            value: '' // Clear selected value
                         },
                         miejscowosc: {
                             ...prev.properties.miejscowosc,
                             enum: [],
-                            value: ''
+                            value: '' // Clear selected value
                         }
                     }
                 }));
             }
 
+            // If powiat changed, clear gmina and miejscowosc
             if (values.powiat) {
+                console.log('Fetching gminy for:', values.powiat); // Debug log
                 const gminy = await terytService.getGminy(values.powiat);
+                console.log('Received gminy:', gminy); // Debug log
+
                 setSchema((prev: Schema) => ({
                     ...prev,
                     properties: {
@@ -58,19 +68,23 @@ export const useTerytFormTalon = () => {
                         gmina: {
                             ...prev.properties.gmina,
                             enum: gminy,
-                            value: ''
+                            value: '' // Clear selected value
                         },
                         miejscowosc: {
                             ...prev.properties.miejscowosc,
                             enum: [],
-                            value: ''
+                            value: '' // Clear selected value
                         }
                     }
                 }));
             }
 
+            // If gmina changed, clear miejscowosc
             if (values.gmina) {
+                console.log('Fetching miejscowosci for:', values.gmina); // Debug log
                 const miejscowosci = await terytService.getMiejscowosci(values.gmina);
+                console.log('Received miejscowosci:', miejscowosci); // Debug log
+
                 setSchema((prev: Schema) => ({
                     ...prev,
                     properties: {
@@ -78,12 +92,13 @@ export const useTerytFormTalon = () => {
                         miejscowosc: {
                             ...prev.properties.miejscowosc,
                             enum: miejscowosci,
-                            value: ''
+                            value: '' // Clear selected value
                         }
                     }
                 }));
             }
         } catch (err) {
+            console.error('Error updating schema:', err); // Debug log
             setError(err instanceof Error ? err.message : 'An error occurred');
         } finally {
             setIsLoading(false);
