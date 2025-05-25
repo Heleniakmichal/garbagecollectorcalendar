@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { terytSchema, type Schema } from '@/schemas/terytSchema';
 import { terytService } from '@/services/terytService';
 
