@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { terytSchema, type Schema } from '@/schemas/terytSchema';
 import { terytService } from '@/services/terytService';
 
@@ -17,10 +17,8 @@ export const useTerytFormTalon = () => {
     const [schema, setSchema] = useState<Schema>(terytSchema);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [formState, setFormState] = useState<FormState>({ values: {} });
 
     const updateSchema = async (newFormState: FormState) => {
-        setFormState(newFormState);
         const { values } = newFormState;
         setIsLoading(true);
         setError(null);
