@@ -108,7 +108,7 @@
 }
 
 .notification .collection {
-    @apply border-b border-blue-500 last:border-b-0;
+    @apply border-b border-blue-500 last_border-b-0;
 }
 
 .notification .type {
