@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { terytSchema, type Schema } from '@/schemas/terytSchema';
 import { terytService } from '@/services/terytService';
 
@@ -17,14 +17,16 @@ export const useTerytFormTalon = () => {
     const [schema, setSchema] = useState<Schema>(terytSchema);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [formState, setFormState] = useState<FormState>({ values: {} });
 
-    const updateSchema = async (formState: FormState) => {
-        const { values } = formState;
+    const updateSchema = async (newFormState: FormState) => {
+        setFormState(newFormState);
+        const { values } = newFormState;
         setIsLoading(true);
         setError(null);
 
         try {
-            if (values.wojewodztwo && !values.powiat) {
+            if (values.wojewodztwo) {
                 const powiaty = await terytService.getPowiaty(values.wojewodztwo);
                 setSchema((prev: Schema) => ({
                     ...prev,
@@ -33,12 +35,20 @@ export const useTerytFormTalon = () => {
                         powiat: {
                             ...prev.properties.powiat,
                             enum: powiaty
+                        },
+                        gmina: {
+                            ...prev.properties.gmina,
+                            enum: []
+                        },
+                        miejscowosc: {
+                            ...prev.properties.miejscowosc,
+                            enum: []
                         }
                     }
                 }));
             }
 
-            if (values.powiat && !values.gmina) {
+            if (values.powiat) {
                 const gminy = await terytService.getGminy(values.powiat);
                 setSchema((prev: Schema) => ({
                     ...prev,
@@ -47,12 +57,16 @@ export const useTerytFormTalon = () => {
                         gmina: {
                             ...prev.properties.gmina,
                             enum: gminy
+                        },
+                        miejscowosc: {
+                            ...prev.properties.miejscowosc,
+                            enum: []
                         }
                     }
                 }));
             }
 
-            if (values.gmina && !values.miejscowosc) {
+            if (values.gmina) {
                 const miejscowosci = await terytService.getMiejscowosci(values.gmina);
                 setSchema((prev: Schema) => ({
                     ...prev,
