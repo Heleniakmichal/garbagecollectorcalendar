@@ -92,29 +92,38 @@
 }
 
 .date {
-    @apply font-medium text-gray-900;
+    composes: font-medium from global;
+    composes: text-gray-900 from global;
 }
 
 .type {
-    @apply text-sm text-gray-600;
+    composes: text-sm from global;
+    composes: text-gray-600 from global;
 }
 
 .location {
-    @apply text-sm text-gray-500;
+    composes: text-sm from global;
+    composes: text-gray-500 from global;
 }
 
-.notification h3 {
-    @apply font-bold text-lg mb-2;
+.notificationTitle {
+    composes: font-bold from global;
+    composes: text-lg from global;
+    composes: mb-2 from global;
 }
 
-.notification .collection {
-    @apply border-b border-blue-500 last_border-b-0;
+.notificationCollection {
+    composes: border-b from global;
+    composes: border-blue-500 from global;
+    composes: last_border-b-0 from global;
 }
 
-.notification .type {
-    @apply text-white text-base;
+.notificationType {
+    composes: text-white from global;
+    composes: text-base from global;
 }
 
-.notification .location {
-    @apply text-blue-100 text-sm;
+.notificationLocation {
+    composes: text-blue-100 from global;
+    composes: text-sm from global;
 } 
